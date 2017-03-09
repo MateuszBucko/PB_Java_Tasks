@@ -1,0 +1,11 @@
+2017-03-09 21:33:43,460 DEBUG app.Main [main] Uruchomiono program !
+2017-03-09 21:33:45,835 INFO bank.BankImpl [main] Tworzenie nowego konta (nazwa: 2 adres: 2) z id: 1
+2017-03-09 21:33:46,960 INFO bank.BankImpl [main] Tworzenie nowego konta (nazwa: 3 adres: 3) z id: 2
+2017-03-09 21:33:47,945 INFO bank.BankImpl [main] Tworzenie nowego konta (nazwa: 4 adres: 4) z id: 3
+2017-03-09 21:33:48,898 INFO bank.BankImpl [main] Tworzenie nowego konta (nazwa: 5 adres: 5) z id: 4
+2017-03-09 21:33:50,351 INFO bank.BankImpl [main] Tworzenie nowego konta (nazwa: 6 adres: 6) z id: 5
+2017-03-09 21:33:51,470 INFO bank.BankImpl [main] Tworzenie nowego konta (nazwa: 7 adres: 7) z id: 6
+2017-03-09 21:33:52,611 INFO bank.BankImpl [main] Tworzenie nowego konta (nazwa: 8 adres: 8) z id: 7
+2017-03-09 21:33:53,517 INFO app.Main [main] Proszę wybrać jedną z opcji menu
+2017-03-09 21:33:53,970 INFO app.Main [main] Proszę wybrać jedną z opcji menu
+2017-03-09 21:33:58,099 INFO bank.BankImpl [main] Tworzenie nowego konta (nazwa: 9 adres: 9) z id: 8

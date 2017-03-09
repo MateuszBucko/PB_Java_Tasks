@@ -1,0 +1,23 @@
+2017-03-09 21:29:44,923 DEBUG app.Main [main] Uruchomiono program !
+2017-03-09 21:29:47,579 INFO bank.BankImpl [main] Tworzenie nowego konta (nazwa: k1 adres: k2) z id: 1
+2017-03-09 21:29:51,755 INFO bank.BankImpl [main] Tworzenie nowego konta (nazwa: k2 adres: k2) z id: 2
+2017-03-09 21:30:04,626 INFO bank.BankImpl [main] Tworzenie nowego konta (nazwa: konto_1 adres: adres_1) z id: 3
+2017-03-09 21:30:07,250 DEBUG bank.BankImpl [main] Szukano konto o nazwie: k1 oraz adresie: k2. Szukane konto ma id: 1
+2017-03-09 21:30:12,291 ERROR bank.BankImpl [main] Konto (nazwa : k3 adres: k3 )nie zostało znalezione
+2017-03-09 21:30:49,026 DEBUG bank.BankImpl [main] Na konto o id: 1 wpłacono kwotę 5000.0
+2017-03-09 21:30:54,883 DEBUG bank.BankImpl [main] Zwrócono stan konta o id: 1 który wynosi 5000.0
+2017-03-09 21:31:07,859 INFO bank.BankImpl [main] Poprawnie wypłacono kwotę: 1000.0z konta o id: 1
+2017-03-09 21:31:14,306 DEBUG bank.BankImpl [main] Zwrócono stan konta o id: 1 który wynosi 4000.0
+2017-03-09 21:31:20,483 ERROR bank.BankImpl [main] Konto o id: 1 nie ma wystarczajacych środków aby wypłacić kwotę: 500000.0
+2017-03-09 21:31:37,579 INFO bank.BankImpl [main] Tworzenie nowego konta (nazwa: konto1 adres: konto1) z id: 4
+2017-03-09 21:31:43,011 INFO bank.BankImpl [main] Tworzenie nowego konta (nazwa: konto adres: 2konto) z id: 5
+2017-03-09 21:31:54,730 DEBUG bank.BankImpl [main] Na konto o id: 4 wpłacono kwotę 5000.0
+2017-03-09 21:32:03,427 ERROR bank.BankImpl [main] Konto o id : 100 nie istnieje. Nie można złożyć depozytu.
+2017-03-09 21:32:16,491 ERROR bank.BankImpl [main] Konto o id: 100 nie istnieje
+2017-03-09 21:32:16,491 ERROR bank.BankImpl [main] Konto o id: 200 nie istnieje
+2017-03-09 21:32:29,019 DEBUG bank.BankImpl [main] Zwrócono stan konta o id: 4 który wynosi 5000.0
+2017-03-09 21:32:33,818 DEBUG bank.BankImpl [main] Zwrócono stan konta o id: 5 który wynosi 0.0
+2017-03-09 21:32:41,539 INFO bank.BankImpl [main] Kwota: 2000.0 została przelana z konta o id: 4 na konto o id: 5
+2017-03-09 21:32:44,579 DEBUG bank.BankImpl [main] Zwrócono stan konta o id: 4 który wynosi 3000.0
+2017-03-09 21:32:46,923 DEBUG bank.BankImpl [main] Zwrócono stan konta o id: 5 który wynosi 2000.0
+2017-03-09 21:32:50,899 INFO app.Main [main] Poprawnie zakończono działanie programu

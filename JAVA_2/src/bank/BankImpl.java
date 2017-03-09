@@ -17,7 +17,7 @@ public class BankImpl implements Bank {
 
     @Override
     public Integer createAccount(String name, String address) {
-        if (findAccount(name, address) == null) {
+        if (findAccountWithoutException(name, address) == null) {
 
             Account newAccount = new Account();
             newAccount.setId(++lastAccountId);
@@ -34,13 +34,26 @@ public class BankImpl implements Bank {
 
     @Override
     public Integer findAccount(String name, String address) {
+        try {
+            for (Account account : accountList) {
+                if (account.getName().equals(name) && account.getAddress().equals(address)) {
+                    log.debug("Szukano konto o nazwie: " + name + " oraz adresie: " + address + ". Szukane konto ma id: " + account.getId());
+                    return account.getId();
+                }
+            }
+            throw new AccountIdException();
+        }catch(AccountIdException aie){
+            log.error("Konto (nazwa : " + name + " adres: " + address + " )" + "nie zostało znalezione");
+        }
+        return null;
+    }
+
+    public Integer findAccountWithoutException(String name, String address) {
         for (Account account : accountList) {
             if (account.getName().equals(name) && account.getAddress().equals(address)) {
-                log.debug("Szukano konto o nazwie: " + name + " oraz adresie: "+address + ". Szukane konto ma id: "+account.getId());
                 return account.getId();
             }
         }
-        log.debug("Konto (nazwa : " + name + " adres: " + address + " )" + "nie zostało znalezione");
         return null;
     }
 
