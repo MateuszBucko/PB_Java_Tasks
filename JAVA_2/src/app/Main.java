@@ -2,41 +2,47 @@ package app;
 
 import bank.Bank;
 import bank.BankImpl;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.Scanner;
 
 public class Main {
 
-    private static final Logger log = Logger.getLogger(Main.class);
+    private static final Logger log = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
         log.debug("Uruchomiono program !");
         displayMenu();
         Scanner sc = new Scanner(System.in);
-        int choose=Integer.MAX_VALUE;
+        int choose = Integer.MAX_VALUE;
+        int id = 0;
+        int idSource=0;
+        int idDest=0;
+        double ammount = 0;
         Bank b = new BankImpl();
 
 
-        while(choose!= 0){
+        while (choose != 0) {
             try {
                 System.out.print("Podaj liczbę: ");
                 choose = sc.nextInt();
                 sc.nextLine();
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("Proszę podać liczbę");
                 sc.nextLine();
 
             }
-            switch (choose){
+            switch (choose) {
                 case 1:
                     System.out.print("Podaj nazwę konta: ");
                     String accountName = sc.nextLine();
                     System.out.print("Podaj adres: ");
                     String accountAddress = sc.nextLine();
-                    if(accountName.isEmpty() || accountAddress.isEmpty()){
+                    if (accountName.isEmpty() || accountAddress.isEmpty()) {
                         log.info("Nazwa konta i adres muszą być wypełnione");
-                    }else{
-                        b.createAccount(accountName,accountAddress);
+                    } else {
+                        b.createAccount(accountName, accountAddress);
                     }
                     break;
                 case 2:
@@ -44,35 +50,42 @@ public class Main {
                     String accountNameFind = sc.nextLine();
                     System.out.print("Podaj adres: ");
                     String accountAddressFind = sc.nextLine();
-                    if(accountNameFind.isEmpty() || accountAddressFind.isEmpty()){
+                    if (accountNameFind.isEmpty() || accountAddressFind.isEmpty()) {
                         log.info("Nazwa konta i adres muszą być wypełnione");
-                    }else{
-                        b.findAccount(accountNameFind,accountAddressFind);
+                    } else {
+                        Integer accountId = b.findAccount(accountNameFind, accountAddressFind);
+                        if (accountId != null) {
+
+                        }
+
                     }
                     break;
                 case 3:
                     try {
                         System.out.print("Podaj id konta: ");
-                        int id = sc.nextInt();
+                        id = sc.nextInt();
                         System.out.print("Podaj kwotę wpłaty : ");
-                        double ammount = sc.nextDouble();
+                        ammount = sc.nextDouble();
 
-                        b.deposit(id,ammount);
+                        b.deposit(id, ammount);
 
-                    }catch(Exception e){
+                    } catch (Bank.AccountIdException aie) {
+                        log.error("Konto o id : " + id + " nie istnieje. Nie można złożyć depozytu.");
+                    } catch (Exception e) {
                         System.out.println("Proszę podać liczbę");
                         sc.nextLine();
                         break;
-            }
+                    }
                     break;
                 case 4:
                     try {
                         System.out.print("Podaj id konta: ");
-                        int idAccountBalace = sc.nextInt();
+                        id = sc.nextInt();
+                        b.getBalance(id);
 
-                        b.getBalance(idAccountBalace);
-
-                    }catch(Exception e){
+                    } catch (Bank.AccountIdException aie) {
+                        log.error("Konto o id: " + id + " nie istnieje ! Nie można pobrać stanu.");
+                    } catch (Exception e) {
                         System.out.println("Proszę podać liczbę");
                         sc.nextLine();
                         break;
@@ -81,13 +94,17 @@ public class Main {
                 case 5:
                     try {
                         System.out.print("Podaj id konta: ");
-                        int id = sc.nextInt();
+                        id = sc.nextInt();
                         System.out.print("Podaj kwotę wypłaty : ");
-                        double ammount = sc.nextDouble();
+                        ammount = sc.nextDouble();
 
-                        b.withdraw(id,ammount);
+                        b.withdraw(id, ammount);
 
-                    }catch(Exception e){
+                    } catch (Bank.InsufficientFundsException ife) {
+                        log.error("Konto o id: " + id + " nie ma wystarczajacych środków aby wypłacić kwotę: " + ammount);
+                    } catch (Bank.AccountIdException aie) {
+                        log.error("Konto o id: " + id + " nie istnieje ! Nie można wypłacić.");
+                    } catch (Exception e) {
                         System.out.println("Proszę podać liczbę");
                         sc.nextLine();
                         break;
@@ -95,14 +112,18 @@ public class Main {
                     break;
                 case 6:
                     try {
-                    System.out.print("Podaj id konta źródła: ");
-                    int idSource = sc.nextInt();
-                    System.out.print("Podaj id konta przeznaczenia: ");
-                    int idDest = sc.nextInt();
-                    System.out.print("Podaj kwotę przelewu: ");
-                    double ammount = sc.nextDouble();
-                    b.transfer(idSource,idDest,ammount);
-                    }catch(Exception e){
+                        System.out.print("Podaj id konta źródła: ");
+                        idSource = sc.nextInt();
+                        System.out.print("Podaj id konta przeznaczenia: ");
+                        idDest = sc.nextInt();
+                        System.out.print("Podaj kwotę przelewu: ");
+                        ammount = sc.nextDouble();
+                        b.transfer(idSource, idDest, ammount);
+                    } catch (Bank.InsufficientFundsException ife) {
+                        log.error("Brak wystarczających środków na koncie o id: " + idSource + " by przelać kwotę: " + ammount);
+                    } catch (Bank.AccountIdException aie) {
+                        log.error("Konto nie istnieje");
+                    } catch (Exception e) {
                         System.out.println("Proszę podać liczbę");
                         sc.nextLine();
                         break;
@@ -120,7 +141,7 @@ public class Main {
     }
 
 
-    public static void displayMenu(){
+    public static void displayMenu() {
         System.out.println("Menu: ");
         System.out.println("1. Utwórz nowe konto");
         System.out.println("2. Znajdź konto");
